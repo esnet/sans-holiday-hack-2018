@@ -1,0 +1,77 @@
+
+Windows IP Configuration
+
+    metadata.google.internal
+    ----------------------------------------
+    No records of type AAAA
+
+
+    metadata.google.internal
+    ----------------------------------------
+    Record Name . . . . . : metadata.google.internal
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 86400
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 169.254.169.254
+
+
+    v10.vortex-win.data.microsoft.com
+    ----------------------------------------
+    Record Name . . . . . : v10.vortex-win.data.microsoft.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 12
+    Data Length . . . . . : 8
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : v10-win.vortex.data.microsoft.com.akadns.net
+
+
+    Record Name . . . . . : v10-win.vortex.data.microsoft.com.akadns.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 12
+    Data Length . . . . . : 8
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : geo.vortex.data.microsoft.com.akadns.net
+
+
+    Record Name . . . . . : geo.vortex.data.microsoft.com.akadns.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 12
+    Data Length . . . . . : 8
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : bn2.vortex.data.microsoft.com.akadns.net
+
+
+    Record Name . . . . . : bn2.vortex.data.microsoft.com.akadns.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 12
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 65.55.44.109
+
+
+    wpad
+    ----------------------------------------
+    Name does not exist.
+
+
+    254.169.254.169.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 254.169.254.169.in-addr.arpa.
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 86400
+    Data Length . . . . . : 8
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : metadata.google.internal
+
+
+    metadata
+    ----------------------------------------
+    Record Name . . . . . : metadata
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 86400
+    Data Length . . . . . : 8
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : metadata.google.internal
+
+

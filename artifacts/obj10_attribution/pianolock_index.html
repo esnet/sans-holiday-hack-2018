@@ -1,0 +1,230 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+<title>Piano Lock</title>
+<style>
+img {
+  draggable: "false";
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  border-radius: 25px;
+}
+.white-key { 
+  width: 12.79%;
+  top: 20px;
+  -webkit-box-shadow: 12px 12px 5px 0px rgba(0,0,0,0.75)inset, 0 9px ;
+  -moz-box-shadow: 12px 12px 5px 0px rgba(0,0,0,0.75)inset, 0 9px ;
+   box-shadow: 12px 12px 5px 0px rgba(0,0,0,0.75)inset, 0 9px ;
+}
+.white-key:active {
+  box-shadow: 0 10px 0 rgba(0,0,0,0.75);
+  top: 30px;
+}
+.black-key:active {
+  box-shadow: 0 10px 0 rgba(0,0,0,0.75);
+  top: 30px;
+}
+.img.black-key{
+  border-radius: 25px;
+}
+.black-key {
+  width: 5.89%;
+  top: 20px;
+  -webkit-box-shadow: 8px 5px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 8px 8px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 8px 8px 5px 0px rgba(0,0,0,0.75);
+}
+
+form#noteBoxes{
+  position: absolute;
+    bottom: 0px;
+    width: auto;
+    right:20%;
+    left:30%;
+    
+  
+}
+input[type='text'] { font-size: 20px;font-family: 'Gloria Hallelujah', cursive;color:black;background-color:whitesmoke;
+}
+
+.banner {
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  max-width:60%;
+  width: 60%;
+  visibility: hidden;
+}
+
+</style>
+<script src='howler.js/dist/howler.js'></script>
+<script src='./conduit.js'></script>
+<!-- <script src='scripts/crypto-js.min.js'></script>
+<script src='scripts/enc-base64.min.js'></script>
+<script src='scripts/hmac-sha256.min.js'></script> -->
+<script>
+  const urlVars = __PARSE_URL_VARS__();
+  const resourceId = urlVars.id;       
+  if (!resourceId) {
+    console.error('No resource ID provided!');
+  }
+
+  var c = new Howl({ src: ['baby-grand/c.mp3'] });
+  var csh = new Howl({ src: ['baby-grand/csh.mp3'] });
+  var d = new Howl({ src: ['baby-grand/d.mp3'] });
+  var dsh = new Howl({ src: ['baby-grand/dsh.mp3'] });
+  var e = new Howl({ src: ['baby-grand/e.mp3'] });
+  var f = new Howl({ src: ['baby-grand/f.mp3'] });
+  var fsh = new Howl({ src: ['baby-grand/fsh.mp3'] });
+  var g = new Howl({ src: ['baby-grand/g.mp3'] });
+  var gsh = new Howl({ src: ['baby-grand/gsh.mp3'] });
+  var a = new Howl({ src: ['baby-grand/a.mp3'] });
+  var ash = new Howl({ src: ['baby-grand/ash.mp3'] });
+  var b = new Howl({ src: ['baby-grand/b.mp3'] });
+  var cc = new Howl({ src: ['baby-grand/cc.mp3'] });
+  
+  function updateSong(note, position) {
+    //updates the list of recent notes the player has pressed
+    
+    if (document.getElementById("noteBoxes").elements[position].value == "-") {
+      //if nothing is in the box, update its value with key pressed
+      document.getElementById("noteBoxes").elements[position].value = note;
+    } else if (position == 0) { 
+      //if we're in the last box, stomp the value
+      document.getElementById("noteBoxes").elements[position].value = note;
+    } else { 
+      //otherwise, push the current value to the left, then stomp current #recursion!
+      updateSong(document.getElementById("noteBoxes").elements[position].value, (position - 1));
+      document.getElementById("noteBoxes").elements[position].value = note;
+    }
+  };
+  
+  function notePress(note) {
+    //depending which note was pressed, play the right tone and update the on-screen tracker
+    switch(note) {
+      case "c":   c.play();   updateSong('C',17);  break;
+      case "csh": csh.play(); updateSong('C#',17); break;
+      case "d":   d.play();   updateSong('D',17);  break;
+      case "dsh": dsh.play(); updateSong('D#',17); break;
+      case "e":   e.play();   updateSong('E',17);  break;
+      case "f":   f.play();   updateSong('F',17);  break;
+      case "fsh": fsh.play(); updateSong('F#',17); break;
+      case "g":   g.play();   updateSong('G',17);  break;
+      case "gsh": gsh.play(); updateSong('G#',17); break;
+      case "a":   a.play();   updateSong('A',17);  break;
+      case "ash": ash.play(); updateSong('A#',17); break;
+      case "b":   b.play();   updateSong('B',17);  break;
+      case "cc":  cc.play();  updateSong('C',17);
+    }
+    if (document.getElementById("noteBoxes").elements[0].value != "-") {
+      var playerSong = "";
+      for  (i = 0; i <= 17; i++) { 
+        playerSong += document.getElementById("noteBoxes").elements[i].value.replace('#','sh');
+      }
+      console.log("playerSong is " + playerSong);
+      if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+      } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+          try {
+            const parsedResponse = JSON.parse(xmlhttp.responseText);
+            if (parsedResponse.success) {
+              __POST_RESULTS__({
+                hash: parsedResponse.hash,
+                resourceId: parsedResponse.resourceId,
+              });
+              document.getElementById('banner').src='images/victory-banner.png';
+              document.getElementById('banner').style.visibility='visible';
+            }
+            if (parsedResponse.message == 'offkey') {
+              console.log('No cigar');
+              document.getElementById('banner').src='images/key-of-e-banner.png';
+              document.getElementById('banner').style.visibility='visible';
+            }
+          } catch(err) {
+            console.error(err);
+          }
+        }
+      }
+      xmlhttp.open("GET","checkpass.php?i=" + playerSong + "&resourceId=" + resourceId, true);
+      xmlhttp.send();
+    }
+  };
+
+  function noteRelease(note) {
+    //depending which note was pressed, play the right tone and update the on-screen tracker
+    switch(note) {
+      case "c":   c.fade(c.volume(),0.0,100);   c.once('fade',function(){c.stop(); c.volume(1.0);}); break;
+      case "csh": csh.fade(c.volume(),0.0,100); csh.once('fade',function(){csh.stop(); csh.volume(1.0);}); break;
+      case "d":   d.fade(c.volume(),0.0,100);   d.once('fade',function(){d.stop();d.volume(1.0);}); break;
+      case "dsh": dsh.fade(c.volume(),0.0,100); dsh.once('fade',function(){dsh.stop(); dsh.volume(1.0);}); break;
+      case "e":   e.fade(c.volume(),0.0,100);   e.once('fade',function(){e.stop(); e.volume(1.0);}); break;
+      case "f":   f.fade(c.volume(),0.0,100);   f.once('fade',function(){f.stop(); f.volume(1.0);}); break;
+      case "fsh": fsh.fade(c.volume(),0.0,100); fsh.once('fade',function(){fsh.stop(); fsh.volume(1.0);}); break;
+      case "g":   g.fade(c.volume(),0.0,100);   g.once('fade',function(){g.stop(); g.volume(1.0);}); break;
+      case "gsh": gsh.fade(c.volume(),0.0,100); gsh.once('fade',function(){gsh.stop(); gsh.volume(1.0);}); break;
+      case "a":   a.fade(c.volume(),0.0,100);   a.once('fade',function(){a.stop(); a.volume(1.0);}); break;
+      case "ash": ash.fade(c.volume(),0.0,100); ash.once('fade',function(){ash.stop(); ash.volume(1.0);}); break;
+      case "b":   b.fade(c.volume(),0.0,100);   b.once('fade',function(){b.stop(); b.volume(1.0);}); break;
+      case "cc":  cc.fade(c.volume(),0.0,100);  cc.once('fade',function(){cc.stop(); cc.volume(1.0);}); break;
+    }
+  };
+</script>
+</head>
+<body background="images/bg.jpg">
+  <div id="keyboard">
+  <!-- white keys -->
+  <img class="white-key" style="position:absolute; LEFT:0px" src='images/keys/c-u.png' onMouseDown='notePress("c")' onMouseUp='noteRelease("c")'>
+  <img class="white-key" style="position:absolute; LEFT:12.46%" src='images/keys/d-u.png' onMouseDown='notePress("d")' onMouseUp='noteRelease("d")'>
+  <img class="white-key" style="position:absolute; LEFT:24.92%" src='images/keys/e-u.png' onMouseDown='notePress("e")' onMouseUp='noteRelease("e")'>
+  <img class="white-key" style="position:absolute; LEFT:37.37%" src='images/keys/f-u.png' onMouseDown='notePress("f")' onMouseUp='noteRelease("f")'>
+  <img class="white-key" style="position:absolute; LEFT:49.83%" src='images/keys/g-u.png' onMouseDown='notePress("g")' onMouseUp='noteRelease("g")'>
+  <img class="white-key" style="position:absolute; LEFT:62.29%" src='images/keys/a-u.png' onMouseDown='notePress("a")' onMouseUp='noteRelease("a")'>
+  <img class="white-key" style="position:absolute; LEFT:74.75%" src='images/keys/b-u.png' onMouseDown='notePress("b")' onMouseUp='noteRelease("b")'>
+  <img class="white-key" style="position:absolute; LEFT:87.21%" src='images/keys/cc-u.png' onMouseDown='notePress("cc")' onMouseUp='noteRelease("cc")'>
+  <!-- black keys -->
+  <img class="black-key" style="position:absolute; LEFT:8.84%" src='images/keys/all-sh-u.png' onMouseDown='notePress("csh")' onMouseUp='noteRelease("csh")'>
+  <img class="black-key" style="position:absolute; LEFT:22.84%" src='images/keys/all-sh-u.png' onMouseDown='notePress("dsh")' onMouseUp='noteRelease("dsh")'>
+  <img class="black-key" style="position:absolute; LEFT:45.95%" src='images/keys/all-sh-u.png' onMouseDown='notePress("fsh")' onMouseUp='noteRelease("fsh")'>
+  <img class="black-key" style="position:absolute; LEFT:59.54%" src='images/keys/all-sh-u.png' onMouseDown='notePress("gsh")' onMouseUp='noteRelease("gsh")'>
+  <img class="black-key" style="position:absolute; LEFT:72.87%" src='images/keys/all-sh-u.png' onMouseDown='notePress("ash")' onMouseUp='noteRelease("ash")'>
+  <!-- close banner -->
+  <img class="banner" id="banner" src='images/key-of-e-banner.png' onMouseDown='this.style.visibility="hidden"'>
+  </div>
+ 
+
+</body>
+
+  <div id="footer">
+
+    <form id="noteBoxes">
+      <input type="text" name="1" disabled="True" size="2" value="-">
+      <input type="text" name="2" disabled="True" size="2" value="-">
+      <input type="text" name="3" disabled="True" size="2" value="-">
+      <input type="text" name="4" disabled="True" size="2" value="-">
+      <input type="text" name="5" disabled="True" size="2" value="-">
+      <input type="text" name="6" disabled="True" size="2" value="-">
+      <input type="text" name="7" disabled="True" size="2" value="-">
+      <input type="text" name="8" disabled="True" size="2" value="-">
+      <input type="text" name="9" disabled="True" size="2" value="-">
+      <input type="text" name="10" disabled="True" size="2" value="-">
+      <input type="text" name="11" disabled="True" size="2" value="-">
+      <input type="text" name="12" disabled="True" size="2" value="-">
+      <input type="text" name="13" disabled="True" size="2" value="-">
+      <input type="text" name="14" disabled="True" size="2" value="-">
+      <input type="text" name="15" disabled="True" size="2" value="-">
+      <input type="text" name="16" disabled="True" size="2" value="-">
+      <input type="text" name="17" disabled="True" size="2" value="-">
+      <input type="text" name="18" disabled="True" size="2" value="-">
+    </form>
+  
+  </div>
+
+</html>

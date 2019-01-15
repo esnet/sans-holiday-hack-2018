@@ -1,0 +1,80 @@
+# uncompyle6 version 2.11.5
+# Python bytecode 3.5 (3351)
+# Decompiled from: Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+# [GCC 8.2.0]
+# Embedded file name: viminfo.py
+# Compiled at: 2017-11-16 12:09:38
+# Size of source mod 2**32: 1323 bytes
+import sys
+import os
+import base64
+import time
+import signal
+import json
+from hashlib import sha256
+import hmac
+
+def calcHmac(secret, resourceId):
+    return hmac.new(secret.encode('utf8'), resourceId.encode('utf8'), sha256).hexdigest()
+
+
+def printResponse(hash, resourceId):
+    return
+    print('#####hhc:%s#####' % json.dumps({'hash': hash,
+     'resourceId': resourceId}))
+
+
+def signal_handler(signal, frame):
+    print('')
+    sys.exit(0)
+
+
+def errorandexit(msg2):
+    error = "\nI'm very sorry, but we seem to have an internal issue preventing the successful\ncompletion of this challenge. Please email support@holidayhackchallenge.com with\na screen-shot or any other details you can provide. Thank you!\n\n"
+    print(error)
+    if msg2 != '':
+        print(msg2)
+    if debuggin:
+        print('\nHit errorandexit(), quitting')
+    sys.exit(-1)
+
+
+if __name__ == '__main__':
+    debuggin = False
+    if debuggin:
+        print('\nKONAMI CODE ENTERED; DEBUG MODE ON!\n')
+    signal.signal(signal.SIGINT, signal_handler)
+try:
+    RESOURCEID = os.environ.get('RESOURCE_ID')
+    if RESOURCEID == '' or RESOURCEID == None:
+        errorandexit('Unable to obtain resource ID information.')
+    if debuggin:
+        print('\nRESOURCEID = ' + RESOURCEID)
+    key = '48e41d5cc5e041c0869395bb8cab791e'
+    h = hmac.new(key.encode('utf8'), RESOURCEID.encode('utf8'), sha256)
+    payload = {'hash': h.hexdigest(),'resourceid': RESOURCEID}
+    if debuggin:
+        print('\nPayload = ')
+    if debuggin:
+        print(payload)
+    sys.stdout.write('Loading, please wait.')
+    sys.stdout.flush()
+    for i in range(0, 5):
+        if not debuggin:
+            time.sleep(1)
+        sys.stdout.write('.')
+        sys.stdout.flush()
+
+    print('\n')
+    guess = input('\n\nWho was the poem written about? ')
+    if guess.lower() == 'elinore':
+        hmac256 = calcHmac(key, RESOURCEID)
+        printResponse(hmac256, RESOURCEID)
+        time.sleep(0.5)
+        print("\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0m\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0m\x1b[37mk\x1b[0m\x1b[37mx\x1b[0m\x1b[37md\x1b[0m\x1b[37md\x1b[0m\x1b[37mo\x1b[0m\x1b[37mo\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[37m:\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m.\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m  \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0m\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0m\x1b[37mk\x1b[0m\x1b[37mx\x1b[0m\x1b[37md\x1b[0m\x1b[37md\x1b[0m\x1b[37mo\x1b[0m\x1b[37mo\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[37m:\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m.\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m  \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0mXK\x1b[37m0\x1b[0m\x1b[37m0\x1b[0mOOkkx\x1b[37md\x1b[0m\x1b[37md\x1b[0m\x1b[37mo\x1b[0m\x1b[37mo\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m:\x1b[37m:\x1b[0m;;\x1b[37m;\x1b[0m,\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m'\x1b[0m'\x1b[37m'\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m...\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m.\x1b[37m.\x1b[0m...\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m     \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0mX\x1b[37mK\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mx\x1b[0m\x1b[37md\x1b[0mdddo\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[31ml\x1b[0m\x1b[31ml\x1b[0m\x1b[37m:\x1b[0m;,;:;,'\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m.,,.\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[31m,\x1b[0m\x1b[31m,\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[31m.\x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m .\x1b[32m.\x1b[0m\x1b[32m.\x1b[0m\x1b[32m.\x1b[0m\x1b[32m.\x1b[0m\x1b[32m.\x1b[0m.   \x1b[37m \x1b[0m\x1b[31m.\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0mX\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0m\x1b[37mx\x1b[0m\x1b[37md\x1b[0mxxxo\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[31mo\x1b[0m\x1b[31mo\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m,ccc\x1b[32m:\x1b[0m;.\x1b[37m.\x1b[0m.\x1b[32m:\x1b[0m\x1b[32m;\x1b[0m.\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[31m,\x1b[0m\x1b[31m:\x1b[0m\x1b[31m;\x1b[0m\x1b[31m'\x1b[0m\x1b[31m.\x1b[0m\x1b[31m.\x1b[0m\x1b[31m.\x1b[0m\x1b[31m,\x1b[0m\x1b[31m:\x1b[0m\x1b[31m;\x1b[0m\x1b[31m.\x1b[0m\x1b[37m \x1b[0m \x1b[32m,\x1b[0m\x1b[32m,\x1b[0m\x1b[32m.\x1b[0m..\x1b[32m.\x1b[0m\x1b[32m,\x1b[0m\x1b[32m,\x1b[0m.\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[31m:\x1b[0m\x1b[31m:\x1b[0m\x1b[31m'\x1b[0m\x1b[31m.\x1b[0m\x1b[31m.\x1b[0m\x1b[31m.\x1b[0m\x1b[31m.\x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0mX\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0mx\x1b[37md\x1b[0mxxxo\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[31mo\x1b[0m\x1b[31mo\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m,c\x1b[32mc\x1b[0m;:\x1b[32m:\x1b[0m;..\x1b[32m:\x1b[0m\x1b[32m;\x1b[0m..\x1b[31m,\x1b[0m\x1b[31m:\x1b[0m\x1b[31m:\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[31m;\x1b[0m\x1b[31m:\x1b[0m\x1b[31m,\x1b[0m\x1b[37m \x1b[0m \x1b[32m,\x1b[0m\x1b[32m,\x1b[0m\x1b[32m.\x1b[0m  .\x1b[32m,\x1b[0m\x1b[32m,\x1b[0m.\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[31m:\x1b[0m\x1b[31m:\x1b[0m\x1b[31m'\x1b[0m\x1b[31m.\x1b[0m\x1b[31m.\x1b[0m\x1b[31m.\x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0mX\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0mx\x1b[37md\x1b[0mxxxo\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[31mo\x1b[0m\x1b[31mo\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m,c\x1b[32mc\x1b[0m,';\x1b[32m:\x1b[0m;'\x1b[32m:\x1b[0m\x1b[32m;\x1b[0m.\x1b[37m.\x1b[0m\x1b[31m,\x1b[0m\x1b[31m:\x1b[0m\x1b[31m:\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[31m,\x1b[0m\x1b[31m:\x1b[0m\x1b[31m;\x1b[0m\x1b[37m \x1b[0m \x1b[32m,\x1b[0m\x1b[32m,\x1b[0m\x1b[32m,\x1b[0m\x1b[32m'\x1b[0m\x1b[32m,\x1b[0m\x1b[32m,\x1b[0m\x1b[32m'\x1b[0m   \x1b[37m \x1b[0m\x1b[31m:\x1b[0m\x1b[31m:\x1b[0m\x1b[31m,\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[31m'\x1b[0m\x1b[31m.\x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0mX\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0mOOkkx\x1b[37md\x1b[0mxxxo\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0mc\x1b[37mc\x1b[0m\x1b[31mo\x1b[0m\x1b[31mo\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m,c\x1b[32mc\x1b[0m,\x1b[37m'\x1b[0m';\x1b[32m:\x1b[0m\x1b[32m;\x1b[0m\x1b[32m:\x1b[0m\x1b[32m;\x1b[0m..\x1b[31m'\x1b[0m\x1b[31m:\x1b[0m\x1b[31m:\x1b[0m\x1b[31m'\x1b[0m\x1b[37m.\x1b[0m. \x1b[37m \x1b[0m\x1b[31m.\x1b[0m\x1b[31m;\x1b[0m\x1b[31m:\x1b[0m\x1b[31m.\x1b[0m\x1b[37m \x1b[0m \x1b[32m,\x1b[0m\x1b[32m,\x1b[0m\x1b[32m.\x1b[0m  \x1b[32m'\x1b[0m\x1b[32m,\x1b[0m\x1b[32m'\x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[31m:\x1b[0m\x1b[31m:\x1b[0m\x1b[31m.\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m  \x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0mX\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0mdxxxddooc\x1b[37mc\x1b[0m\x1b[31mo\x1b[0m\x1b[31mo\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m,c\x1b[32mc\x1b[0m,\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m.,\x1b[32m:\x1b[0m\x1b[32m:\x1b[0m\x1b[32m;\x1b[0m..\x1b[37m.\x1b[0m\x1b[31m.\x1b[0m\x1b[31m;\x1b[0m\x1b[31m:\x1b[0m\x1b[31m;\x1b[0m\x1b[31m,\x1b[0m\x1b[31m,\x1b[0m\x1b[31m;\x1b[0m\x1b[31m:\x1b[0m\x1b[31m,\x1b[0m\x1b[31m.\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[32m,\x1b[0m\x1b[32m,\x1b[0m\x1b[32m.\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[32m'\x1b[0m\x1b[32m,\x1b[0m\x1b[32m'\x1b[0m \x1b[37m \x1b[0m\x1b[31m:\x1b[0m\x1b[31m:\x1b[0m\x1b[31m;\x1b[0m\x1b[31m;\x1b[0m\x1b[31m;\x1b[0m\x1b[31m;\x1b[0m\x1b[31m;\x1b[0m\x1b[31m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0m\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0m\x1b[37mk\x1b[0m\x1b[37mx\x1b[0mdddoollcc\x1b[37m:\x1b[0m\x1b[37m:\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m,\x1b[0m,,'\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m.\x1b[0m.....\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m..\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m \x1b[0m  \x1b[37m \x1b[0m\x1b[37m \x1b[0m    \x1b[37m \x1b[0m       \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m  \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0m\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0m\x1b[37mk\x1b[0m\x1b[37mx\x1b[0m\x1b[37md\x1b[0m\x1b[37md\x1b[0m\x1b[37mo\x1b[0m\x1b[37mo\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[37m:\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m.\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m  \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\x1b[37mW\x1b[0m\x1b[37mW\x1b[0m\x1b[37mN\x1b[0m\x1b[37mX\x1b[0m\x1b[37mX\x1b[0m\x1b[37mK\x1b[0m\x1b[37m0\x1b[0m\x1b[37m0\x1b[0m\x1b[37mO\x1b[0m\x1b[37mO\x1b[0m\x1b[37mk\x1b[0m\x1b[37mk\x1b[0m\x1b[37mx\x1b[0m\x1b[37md\x1b[0m\x1b[37md\x1b[0m\x1b[37mo\x1b[0m\x1b[37mo\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37ml\x1b[0m\x1b[37mc\x1b[0m\x1b[37mc\x1b[0m\x1b[37m:\x1b[0m\x1b[37m:\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m;\x1b[0m\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m,\x1b[0m\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m'\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m.\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m.\x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m  \x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\x1b[37m \x1b[0m\n\nThank you for solving this mystery, Slick.\nReading the .viminfo sure did the trick.\nLeave it to me; I will handle the rest.\nThank you for giving this challenge your best.\n\n-Tangle Coalbox\n-ER Investigator\n\nCongratulations!\n")
+    else:
+        print("Sorry, I don't think that's what the forensic data shows.")
+except Exception as e:
+    errorandexit(str(e))
+    sys.exit(0)
+# okay decompiling viminfo.extracted.pyc

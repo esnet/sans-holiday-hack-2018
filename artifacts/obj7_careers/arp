@@ -1,0 +1,12 @@
+
+Interface: 10.126.0.4 --- 0x3
+  Internet Address      Physical Address      Type
+  10.126.0.1            42-01-0a-7e-00-01     dynamic   
+  10.126.0.9            42-01-0a-7e-00-09     dynamic   
+  10.126.15.255         ff-ff-ff-ff-ff-ff     static    
+  169.254.169.254       42-01-0a-7e-00-01     dynamic   
+  224.0.0.22            01-00-5e-00-00-16     static    
+  224.0.0.252           01-00-5e-00-00-fc     static    
+  224.0.0.253           01-00-5e-00-00-fd     static    
+  239.255.255.250       01-00-5e-7f-ff-fa     static    
+  255.255.255.255       ff-ff-ff-ff-ff-ff     static    
